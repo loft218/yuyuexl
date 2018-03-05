@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import './index.css';
 import App from './App';
+import AdminLogin from './AdminLogin'
 import Admin from './admin/Admin'
 
 import registerServiceWorker from './registerServiceWorker';
@@ -39,7 +40,8 @@ ReactDOM.render(
     <Router>
         <React.Fragment>
             <Route exact path='/' component={App} />
-            <AdminRoute path='/admin' component={Admin} />
+            <Route exact path='/admin/login' component={AdminLogin} />
+            {/* <AdminRoute path='/admin' component={Admin} /> */}
         </React.Fragment>
     </Router>
     , document.getElementById('root'));
