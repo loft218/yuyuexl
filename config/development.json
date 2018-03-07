@@ -1,0 +1,9 @@
+{
+    "log4js": {
+        "categories": {
+            "default": {
+                "level": "debug"
+            }
+        }
+    }
+}

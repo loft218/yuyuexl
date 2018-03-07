@@ -1,0 +1,27 @@
+{
+    "name": "yuyuexl-server",
+    "port": 3001,
+    "log4js": {
+        "appenders": {
+            "console": {
+                "type": "console"
+            },
+            "dfile": {
+                "type": "dateFile",
+                "filename": "./logs/yuyuexl",
+                "pattern": ".yyyy-MM-dd.log",
+                "alwaysIncludePattern": true
+            }
+        },
+        "categories": {
+            "default": {
+                "appenders": [
+                    "console",
+                    "dfile"
+                ],
+                "level": "info"
+            }
+        },
+        "pm2": true
+    }
+}
