@@ -1,7 +1,5 @@
-#!/usr/bin/env node
-
 /**
- * bin/www
+ * yuyuexl server
  */
 
 const config = require('config')
@@ -12,7 +10,7 @@ log4js.configure(config.get('log4js'))
 const logger = log4js.getLogger('startup')
 
 //startup
-const server = require('../server')
-server.listen(config.get("port") || 0, () => {
+const app = require('./app')
+app.listen(config.get("port") || 0, () => {
     logger.info(`[${process.env.NODE_ENV}] ${config.name} listened on ${config.get("port") || 0}`)
 })
