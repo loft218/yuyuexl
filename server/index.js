@@ -12,5 +12,5 @@ const logger = log4js.getLogger('startup')
 //startup
 const app = require('./app')
 app.listen(config.get("port") || 0, () => {
-    logger.info(`[${process.env.NODE_ENV}] ${config.name} listened on ${config.get("port") || 0}`)
+    logger.info(`[${process.env.NODE_ENV || 'development'}] ${config.name} listened on ${config.get("port") || 0}`)
 })
