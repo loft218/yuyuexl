@@ -6,9 +6,11 @@
         "config": "^1.30.0",
         "koa": "^2.5.0",
         "koa-bodyparser": "^4.2.0",
+        "koa-jwt": "^3.3.0",
         "koa-morgan": "^1.0.1",
         "koa-route": "^3.2.0",
-        "log4js": "^2.5.3"
+        "log4js": "^2.5.3",
+        "lowdb": "^1.0.0"
     },
     "scripts": {
         "start": "concurrently \"npm run server\" \"npm run client\"",

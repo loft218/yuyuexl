@@ -15,14 +15,31 @@ app.use(async (ctx, next) => {
     try {
         ctx.body = ctx.request.body
         await next()
+        if (typeof ctx.body === 'string') {
+            ctx.body = {
+                err_msg: ctx.body
+            }
+        }
     } catch (e) {
         logger.error(e.stack || e)
-        ctx.status = 500
+        ctx.status = (ctx.status === 200) ? 500 : ctx.status
         ctx.body = {
+            status: e.status,
             err_msg: e.message || 'server error'
         }
     }
 })
+
+// app.use(async (ctx, next) => {
+//     return next().catch((err) => {
+//         if (401 === err.status) {
+//             ctx.status = 401
+//             ctx.body = 'Protected resource, use Authorization header to get access\n'
+//         } else {
+//             throw err
+//         }
+//     })
+// })
 
 require('./routes')(app)
 
