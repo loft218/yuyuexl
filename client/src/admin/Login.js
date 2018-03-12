@@ -8,10 +8,16 @@ class Login extends Component {
         redirectToReferrer: false
     }
 
-    login = () => {
-        AdminAuth.authenticate(() => {
-            this.setState({ redirectToReferrer: true })
+    login = (event) => {
+        const username = this.inputUsername.value
+        const password = this.inputPassword.value
+
+        console.log('username:', username, 'password', password)
+        AdminAuth.authenticate(username, password, (err) => {
+            if (!err)
+                this.setState({ redirectToReferrer: true })
         })
+        event.preventDefault()
     }
 
     componentWillMount() {
@@ -29,13 +35,13 @@ class Login extends Component {
         }
 
         return (
-            <form className="form-signin">
+            <form className="form-signin" onSubmit={this.login}>
                 <img className="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72" />
                 <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
                 <label htmlFor="inputEmail" className="sr-only">Email address</label>
-                <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required="" autoFocus="" />
+                <input type="text" className="form-control" placeholder="用户名" required="" autoFocus="" ref={input => this.inputUsername = input} />
                 <label htmlFor="inputPassword" className="sr-only">Password</label>
-                <input type="password" id="inputPassword" className="form-control" placeholder="Password" required="" />
+                <input type="password" className="form-control" placeholder="密码" required="" ref={input => this.inputPassword = input} />
                 <div className="checkbox mb-3">
                     <label><input type="checkbox" value="remember-me" /> Remember me</label>
                 </div>
