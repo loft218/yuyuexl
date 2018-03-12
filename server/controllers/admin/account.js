@@ -12,8 +12,10 @@ module.exports = {
             ctx.status = 401
             throw new Error('Authentication failed')
         }
+
+        const token = Admin.sign({ username }, 60 * 60)
         ctx.body = {
-            ok: 1
+            token: token
         }
     }
 }

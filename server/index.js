@@ -3,6 +3,11 @@
  */
 
 const config = require('config')
+const dotenv = require('dotenv')
+const env = dotenv.config()
+if (env.error) {
+    throw env.error
+}
 
 //log configure
 const log4js = require('log4js')

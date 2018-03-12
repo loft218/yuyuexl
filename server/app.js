@@ -6,11 +6,15 @@ const bodyParser = require('koa-bodyparser')
 const log4js = require('log4js')
 const logger = log4js.getLogger('app')
 const morgan = require('koa-morgan')
-//koa app
+
+const routers = require('./routers')
+
+// koa app
 const app = new Koa()
 app.use(bodyParser())
 app.use(morgan('tiny'))
 
+//region middlewares
 app.use(async (ctx, next) => {
     try {
         ctx.body = ctx.request.body
@@ -22,30 +26,23 @@ app.use(async (ctx, next) => {
         }
     } catch (e) {
         logger.error(e.stack || e)
+        if (401 === e.status) {
+            ctx.status = 401
+        }
         ctx.status = (ctx.status === 200) ? 500 : ctx.status
         ctx.body = {
-            status: e.status,
             err_msg: e.message || 'server error'
         }
     }
 })
 
-// app.use(async (ctx, next) => {
-//     return next().catch((err) => {
-//         if (401 === err.status) {
-//             ctx.status = 401
-//             ctx.body = 'Protected resource, use Authorization header to get access\n'
-//         } else {
-//             throw err
-//         }
-//     })
-// })
-
-require('./routes')(app)
+app.use(routers.api_router.routes())
+app.use(routers.admin_router.routes())
 
 app.use(async (ctx) => {
     ctx.status = 404
     ctx.body = { err_msg: '404' }
 })
+//endregion
 
 module.exports = app
