@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import logo from './assets/images/logo.svg'
-import './App.css'
 
 import axios from 'axios'
 
@@ -11,6 +10,10 @@ class App extends Component {
         this.state = {
             welcome: ''
         }
+    }
+
+    componentWillMount() {
+        import('./App.css')
     }
 
     componentDidMount() {

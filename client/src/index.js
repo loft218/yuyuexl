@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import './assets/index.css';
+
 
 import App from './App';
 import AdminIndex from './admin/Index'
@@ -9,7 +9,7 @@ import NotFound from './NotFound'
 
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(
+ReactDOM.render(    
     <Router>
         <Switch>
             <Route exact path='/' component={App} />
