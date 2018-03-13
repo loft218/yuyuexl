@@ -1,21 +1,28 @@
+import Cookies from 'js-cookie'
 import { Auth } from '../actions/admin'
 
 const AdminAuth = {
-    isAuthenticated: false,
+    get isAuthenticated() {
+        if (Cookies.get('admin_token'))
+            return true
+        return false
+    },
     authenticate(username, password, cb) {
         Auth.signIn(username, password)
             .then(res => {
                 console.log(res.data)
-                this.isAuthenticated = true
-                cb()
+                // this.isAuthenticated = true
+                Cookies.set('admin_token', res.data.token)
+                cb(res.status, res.data)
             })
             .catch(err => {
-                console.error(err)
-                cb(err)
+                // console.error(err.response)
+                cb(err.response.status, err.response.data)
             })
     },
     signout(cb) {
-        this.isAuthenticated = false
+        // this.isAuthenticated = false
+        Cookies.remove('admin_token')
         setTimeout(cb, 100)
     }
 }

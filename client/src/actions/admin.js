@@ -10,7 +10,7 @@ const httpGet = (url, params = {}) => {
 }
 
 const httpPost = (url, data = {}) => {
-    return instance.post(url, { data })
+    return instance.post(url, data)
 }
 
 const signIn = (username, password) => {

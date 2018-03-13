@@ -13,8 +13,8 @@ class Login extends Component {
         const password = this.inputPassword.value
 
         console.log('username:', username, 'password', password)
-        AdminAuth.authenticate(username, password, (err) => {
-            if (!err)
+        AdminAuth.authenticate(username, password, (status, data) => {
+            if (status === 200)
                 this.setState({ redirectToReferrer: true })
         })
         event.preventDefault()
