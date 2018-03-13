@@ -13,9 +13,11 @@ module.exports = {
             throw new Error('Authentication failed')
         }
 
-        const token = Admin.sign({ username }, 60 * 60)
+        const expiresIn = 60 * 60
+        const token = Admin.sign({ username }, expiresIn)
         ctx.body = {
-            token: token
+            token,
+            expires_in: expiresIn
         }
     }
 }

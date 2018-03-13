@@ -6,9 +6,12 @@ import Sidebar from './Sidebar'
 import Dashboard from './Dashboard'
 
 class Admin extends Component {
-    render() {
-        import('./Admin.css')
 
+    componentWillMount() {
+        import('./Admin.css')
+    }
+
+    render() {
         return (
             <React.Fragment>
                 <Header />

@@ -12,7 +12,8 @@ const AdminAuth = {
             .then(res => {
                 console.log(res.data)
                 // this.isAuthenticated = true
-                Cookies.set('admin_token', res.data.token)
+                const expires = new Date(new Date().getTime() + res.data.expires_in * 1000)
+                Cookies.set('admin_token', res.data.token, { expires })
                 cb(res.status, res.data)
             })
             .catch(err => {
@@ -20,7 +21,7 @@ const AdminAuth = {
                 cb(err.response.status, err.response.data)
             })
     },
-    signout(cb) {
+    signOut(cb) {
         // this.isAuthenticated = false
         Cookies.remove('admin_token')
         setTimeout(cb, 100)
